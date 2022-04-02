@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MazeGen : MonoBehaviour
 {
     
@@ -17,6 +18,7 @@ public class MazeGen : MonoBehaviour
 
     public bool generateWallMaze = false;
     public bool generatePillarMaze = false;
+    public float scale = 5;
 
     int rand(int size){
         return (int) Random.Range(0.0f, (float)size - 0.001f);
@@ -140,13 +142,13 @@ public class MazeGen : MonoBehaviour
             for (int j = 0; j < size+1; j++)
             {
                 if( hwalls[i,j] && i < size){
-                    var prefab = Instantiate(wall, new Vector3(i*4, -4, j*4-2), Quaternion.identity);
-                    prefab.transform.localScale = new Vector3(4, 1, 1);
+                    var prefab = Instantiate(wall, new Vector3(i*scale, -scale, j*scale-scale/2), Quaternion.identity);
+                    prefab.transform.localScale = new Vector3(scale, scale/4, scale/4);
                     prefab.name = "hwall_{" + i.ToString() + "," + j.ToString()+"}";
                 }
                 if( vwalls[i,j] && j < size ){
-                    var prefab = Instantiate(wall, new Vector3(i*4-2, -4, j*4), Quaternion.identity);
-                    prefab.transform.localScale = new Vector3(1, 1, 4);
+                    var prefab = Instantiate(wall, new Vector3(i*scale-scale/2, -scale, j*scale), Quaternion.identity);
+                    prefab.transform.localScale = new Vector3(scale/4, scale/4, scale);
                     prefab.name = "vwall_{" + i.ToString() + "," + j.ToString()+"}";
                 }
             }
@@ -159,17 +161,17 @@ public class MazeGen : MonoBehaviour
             for (int j = 0; j < size; j++)
             {
                 if( !hwalls[i,j] && i < size){
-                    var prefab = Instantiate(wall, new Vector3(i*4+0, 0, j*4-2), Quaternion.identity);
-                    prefab.transform.localScale = new Vector3(0.5f, 0.1f, 4);
+                    var prefab = Instantiate(wall, new Vector3(i*scale, 0, j*scale-scale/2), Quaternion.identity);
+                    prefab.transform.localScale = new Vector3(scale/8, scale/40, scale);
                     prefab.name = "vwall_{" + i.ToString() + "," + j.ToString()+"}";
                 }
                 if( !vwalls[i,j] && j < size ){
-                    var prefab = Instantiate(wall, new Vector3(i*4-2, 0, j*4+0), Quaternion.identity);
-                    prefab.transform.localScale = new Vector3(4, 0.1f, 0.5f);
+                    var prefab = Instantiate(wall, new Vector3(i*scale-scale/2, 0, j*scale), Quaternion.identity);
+                    prefab.transform.localScale = new Vector3(scale, scale/40, scale/8);
                     prefab.name = "hwall_{" + i.ToString() + "," + j.ToString()+"}";
                 }
-                var pillar = Instantiate(wall, new Vector3(i*4+0, -2, j*4+0), Quaternion.identity);
-                pillar.transform.localScale = new Vector3(1, 4, 1);
+                var pillar = Instantiate(wall, new Vector3(i*scale, -scale*5/2, j*scale), Quaternion.identity);
+                pillar.transform.localScale = new Vector3(scale/4, scale*5, scale/4);
             }
         }
     }
