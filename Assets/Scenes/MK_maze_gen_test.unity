@@ -221,7 +221,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wall: {fileID: 25189461855354344, guid: 8b08727e0d03159e19ac90aff6fe444f, type: 3}
-  size: 20
+  size: 5
+  generateWallMaze: 0
+  generatePillarMaze: 1
 --- !u!1 &608239800
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,9 @@ public class MazeGen : MonoBehaviour
     public int size;
     private int unvisited = 0;
 
+    public bool generateWallMaze = false;
+    public bool generatePillarMaze = false;
+
     int rand(int size){
         return (int) Random.Range(0.0f, (float)size - 0.001f);
     }
@@ -63,7 +66,7 @@ public class MazeGen : MonoBehaviour
 
     void printCurr(int[] p){
         string s = pointString(p);
-        Debug.Log("visiting: " + unvisited.ToString() + " : " + s);
+        // Debug.Log("visiting: " + unvisited.ToString() + " : " + s);
     }
 
     void visit(int[] p){
@@ -83,35 +86,34 @@ public class MazeGen : MonoBehaviour
             var i = p1[0];
             var j = p1[1];
             vwalls[ i, j ] = false;
-            Debug.Log("Removing vwall " + i.ToString() + "," + j.ToString());
+            // Debug.Log("Removing vwall " + i.ToString() + "," + j.ToString());
         }
         if(dy == -1){
             var i = p1[0];
             var j = p1[1];
             hwalls[ i, j ] = false;
-            Debug.Log("Removing hwall " + i.ToString() + "," + j.ToString());
+            // Debug.Log("Removing hwall " + i.ToString() + "," + j.ToString());
         }
         if(dx == 1){
             var i = p1[0]+dx;
             var j = p1[1];
             vwalls[ i, j ] = false;
-            Debug.Log("Removing vwall " + i.ToString() + "," + j.ToString());
+            // Debug.Log("Removing vwall " + i.ToString() + "," + j.ToString());
         }
         if(dy == 1){
             var i = p1[0];
             var j = p1[1]+dy;
             hwalls[ i, j ] = false;
-            Debug.Log("Removing hwall " + i.ToString() + "," + j.ToString());
+            // Debug.Log("Removing hwall " + i.ToString() + "," + j.ToString());
         }
     }
 
     void AldousBroder(){
         // start by picking a random cell.
-        int[] p = {rand(size), rand(size)};
-        // int[] p = {0,0};
+        // int[] p = {rand(size), rand(size)};
+        int[] p = {0,0};
         visit(p);
 
-        // while(unvisited <= 15){
         while(unvisited < size*size){
             var next = pickNeighbor(p);
             if(!isvisited(next)){
@@ -132,21 +134,42 @@ public class MazeGen : MonoBehaviour
         }
     }
 
-    void generate_visual(){
+    void instantiateWallMaze(){
         for (int i = 0; i < size+1; i++)
         {
             for (int j = 0; j < size+1; j++)
             {
                 if( hwalls[i,j] && i < size){
-                    var prefab = Instantiate(wall, new Vector3(i*4, 0, j*4-2), Quaternion.identity);
+                    var prefab = Instantiate(wall, new Vector3(i*4, -4, j*4-2), Quaternion.identity);
                     prefab.transform.localScale = new Vector3(4, 1, 1);
                     prefab.name = "hwall_{" + i.ToString() + "," + j.ToString()+"}";
                 }
                 if( vwalls[i,j] && j < size ){
-                    var prefab = Instantiate(wall, new Vector3(i*4-2, 0, j*4), Quaternion.identity);
+                    var prefab = Instantiate(wall, new Vector3(i*4-2, -4, j*4), Quaternion.identity);
                     prefab.transform.localScale = new Vector3(1, 1, 4);
                     prefab.name = "vwall_{" + i.ToString() + "," + j.ToString()+"}";
                 }
+            }
+        }
+    }
+
+    void instantiatePillarMaze(){
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                if( !hwalls[i,j] && i < size){
+                    var prefab = Instantiate(wall, new Vector3(i*4+0, 0, j*4-2), Quaternion.identity);
+                    prefab.transform.localScale = new Vector3(0.5f, 0.1f, 4);
+                    prefab.name = "vwall_{" + i.ToString() + "," + j.ToString()+"}";
+                }
+                if( !vwalls[i,j] && j < size ){
+                    var prefab = Instantiate(wall, new Vector3(i*4-2, 0, j*4+0), Quaternion.identity);
+                    prefab.transform.localScale = new Vector3(4, 0.1f, 0.5f);
+                    prefab.name = "hwall_{" + i.ToString() + "," + j.ToString()+"}";
+                }
+                var pillar = Instantiate(wall, new Vector3(i*4+0, -2, j*4+0), Quaternion.identity);
+                pillar.transform.localScale = new Vector3(1, 4, 1);
             }
         }
     }
@@ -158,7 +181,8 @@ public class MazeGen : MonoBehaviour
         fill(hwalls, true);
         fill(vwalls, true);
         AldousBroder();
-        generate_visual();
+        if(generateWallMaze) instantiateWallMaze();
+        if(generatePillarMaze) instantiatePillarMaze();
     }
 
 }
