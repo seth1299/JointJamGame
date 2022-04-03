@@ -17,6 +17,6 @@ public class MovingLight : MonoBehaviour
     {
         // transform.position = new Vector3(Mathf.Sin(Time.time*2f)*4, 0, 5);
         transform.rotation = Quaternion.AngleAxis(spin, new Vector3(0.2f, 1, 0));
-        spin += 1;
+        spin += 0.1f;
     }
 }

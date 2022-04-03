@@ -13,6 +13,7 @@ public class MazeGenPrefabs : MonoBehaviour
     public GameObject wall2;
     public GameObject floorTile;
     public GameObject plank;
+    public GameObject lightPrefab;
     public bool[,] visited;
     public bool[,] hwalls; 
     public bool[,] vwalls; 
@@ -200,6 +201,13 @@ public class MazeGenPrefabs : MonoBehaviour
                 pillar.name = "pillar_{" + i.ToString() + "," + j.ToString()+"}";
                 r = Random.Range(-45.0f, 45.0f);
                 pillar.transform.rotation = Quaternion.AngleAxis(r, Vector3.up);
+
+                int spacing = 3;
+                if( i % spacing == 0 &&  j % spacing == 0){
+                    var light = Instantiate(lightPrefab, new Vector3(i*scale, 5, j*scale), Quaternion.identity);
+                    light.name = "light_{" + i.ToString() + "," + j.ToString()+"}";
+                }
+
             }
         }
     }
