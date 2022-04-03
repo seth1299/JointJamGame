@@ -53,7 +53,7 @@ public class SoundManager : MonoBehaviour
     }
     public void Play(string name)
     {
-        Sound sound = Array.Find(sounds, s => s.name == name);
+        Sound sound = sounds.Find(sounds, s => s.name == name);
 
         if (sound == null)
         {
@@ -68,7 +68,7 @@ public class SoundManager : MonoBehaviour
 
     public void Stop(string name)
     {
-        Sound sound = Array.Find(sounds, s => s.name == name);
+        Sound sound = sounds.Find(sounds, s => s.name == name);
 
         if (sound == null)
         {

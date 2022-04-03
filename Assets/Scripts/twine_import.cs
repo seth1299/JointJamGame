@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 void ParseTwineText( string twineText )
 {
@@ -8,6 +9,7 @@ void ParseTwineText( string twineText )
 
     bool passedHeader = false;
     const int kIndexOfContentStart = 4;
+
     for ( int i = 0; i < nodeData.Length; i++ )
     {
 
