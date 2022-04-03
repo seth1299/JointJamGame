@@ -40,6 +40,11 @@ public class MainMenuController : MonoBehaviour
         SwitchMenu(2);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void SwitchMenu(int value)
     {
         switch (value)
