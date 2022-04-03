@@ -1,4 +1,4 @@
-        public void ParseTwineText( string twineText )
+        void ParseTwineText( string twineText )
         {
             string[] nodeData = twineText.Split(new string[] { "::" }, StringSplitOptions.None);
 
