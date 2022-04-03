@@ -14,4 +14,34 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Courtroom.unity
     guid: 53eb1489275167f448bd4bba6fad4660
+  - enabled: 1
+    path: Assets/Scenes/Chess.unity
+    guid: 9cd4b27369618171d80e9719763b2891
+  - enabled: 1
+    path: Assets/Scenes/Ian_WallMazeLevelGenerated.unity
+    guid: 5dfb1b93cf2c8dd4196de656ad5e17d8
+  - enabled: 1
+    path: Assets/Scenes/Ian_PillarMazeLevelGenerated.unity
+    guid: 7fca7e879aa97244ea35be7065ad1a86
+  - enabled: 1
+    path: Assets/Scenes/Ian-Courtroom.unity
+    guid: 035e9fe77bdd64f46ad9f9ef707e0190
+  - enabled: 1
+    path: Assets/Scenes/hobo_blackout 1.unity
+    guid: a163c1bf71f351847bb9dd164bbe7317
+  - enabled: 1
+    path: Assets/Scenes/MK_WallMazeLevelGenerated.unity
+    guid: ee7d8863fdeaf40c18dd55037c4925e9
+  - enabled: 1
+    path: Assets/Scenes/MK_PillarMazeLevelGenerated.unity
+    guid: adfb3f66977741b0c89b594d07fc625e
+  - enabled: 1
+    path: Assets/Scenes/MK_PillarMazeLevel.unity
+    guid: 46529de5b5c462c988ad74595d63af13
+  - enabled: 1
+    path: Assets/Scenes/MK_pillar_mat_test.unity
+    guid: 443baf7de4d76ac0ca0456240d7a067d
+  - enabled: 1
+    path: Assets/Scenes/MK_maze_gen_test.unity
+    guid: c1515b873f2d2d582be59f4deeee2e3a
   m_configObjects: {}
