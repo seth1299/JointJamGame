@@ -1,7 +1,4 @@
-        // There were over 9 errors with this file which produced compile errors and made it impossible to run the game, so I have commented out the code.
-        
-        /*
-        public void ParseTwineText( string twineText )
+        void ParseTwineText( string twineText )
         {
             string[] nodeData = twineText.Split(new string[] { "::" }, StringSplitOptions.None);
 
@@ -112,4 +109,3 @@
                 nodes[ curNode.title ] = curNode;
             }
         }
-        */
