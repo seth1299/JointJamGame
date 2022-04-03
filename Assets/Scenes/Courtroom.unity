@@ -432,30 +432,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentIDCounter: 16
-  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":735,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"All
-    stand for the honorable Judge William Anytus. Be seated.","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Bailiff","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":9}],"EditorInfo":{"isRoot":false,"xPos":995,"yPos":17},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"Good
+  json: '{"Options":[],"Parameters":[],"SpeechNodes":[{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":8}],"EditorInfo":{"isRoot":true,"xPos":548.5,"yPos":22},"ID":0,"ParamActions":[],"TMPFontGUID":null,"Text":"All
+    stand for the honorable Judge William Anytus. Be seated.","parentUIDs":[],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Bailiff","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":9}],"EditorInfo":{"isRoot":false,"xPos":808.5,"yPos":17},"ID":8,"ParamActions":[],"TMPFontGUID":null,"Text":"Good
     morning counsel. Alright, back on the record in the Hinckley matter. Mr. River
     Hinckley is present with his counsel today, Mr. Donovan Spence.","parentUIDs":[0],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Judge
-    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":10}],"EditorInfo":{"isRoot":false,"xPos":998,"yPos":141},"ID":9,"ParamActions":[],"TMPFontGUID":null,"Text":"The
+    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":10}],"EditorInfo":{"isRoot":false,"xPos":811.5,"yPos":141},"ID":9,"ParamActions":[],"TMPFontGUID":null,"Text":"The
     family of the desceased and the defendant declined to attend. The people are
     represented by Mrs. Hui-ying Meletus.","parentUIDs":[8],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Judge
-    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":11}],"EditorInfo":{"isRoot":false,"xPos":1004,"yPos":256},"ID":10,"ParamActions":[],"TMPFontGUID":null,"Text":"We
+    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":11}],"EditorInfo":{"isRoot":false,"xPos":817.5,"yPos":256},"ID":10,"ParamActions":[],"TMPFontGUID":null,"Text":"We
     have a few matters to dispose of before the opening proceedings. One of the jurors
     handed a balief a note before retiring last night requesting that the court allow
     them to watch the superbowl this weekend.","parentUIDs":[9],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Judge
-    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":12}],"EditorInfo":{"isRoot":false,"xPos":1009,"yPos":378},"ID":11,"ParamActions":[],"TMPFontGUID":null,"Text":"I
+    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":12}],"EditorInfo":{"isRoot":false,"xPos":822.5,"yPos":378},"ID":11,"ParamActions":[],"TMPFontGUID":null,"Text":"I
     indicated to them that this, nor any request like it, would be allowed due to
     the sensative nature of the case. Any comments?","parentUIDs":[10],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Judge
-    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":13}],"EditorInfo":{"isRoot":false,"xPos":1011,"yPos":495},"ID":12,"ParamActions":[],"TMPFontGUID":null,"Text":"Hearing
+    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":13}],"EditorInfo":{"isRoot":false,"xPos":824.5,"yPos":495},"ID":12,"ParamActions":[],"TMPFontGUID":null,"Text":"Hearing
     none, we may begin. Mr. River Hinckley is accused of robbery, possession, use,
     and intent to sell controlled substances, tampering with evidence, arson, resisting
     arrest,","parentUIDs":[11],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Judge
-    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":14}],"EditorInfo":{"isRoot":false,"xPos":1017,"yPos":610},"ID":13,"ParamActions":[],"TMPFontGUID":null,"Text":"two
+    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":14}],"EditorInfo":{"isRoot":false,"xPos":830.5,"yPos":610},"ID":13,"ParamActions":[],"TMPFontGUID":null,"Text":"two
     counts of assualt and battery, attempted murder of a law enforcement officer,
     murder of the first degree, and recently, four counts of purgatory. ","parentUIDs":[12],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Judge
-    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":15}],"EditorInfo":{"isRoot":false,"xPos":1021,"yPos":734},"ID":14,"ParamActions":[],"TMPFontGUID":null,"Text":"Ahem,
+    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[{"__type":"EditableSpeechConnection:#DialogueEditor","Conditions":[],"NodeUID":15}],"EditorInfo":{"isRoot":false,"xPos":834.5,"yPos":734},"ID":14,"ParamActions":[],"TMPFontGUID":null,"Text":"Ahem,
     sorry. Purjury. Mr. Spence, how does the accused plea?","parentUIDs":[13],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Judge
-    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":1260,"yPos":735},"ID":15,"ParamActions":[],"TMPFontGUID":null,"Text":"The
+    William Anytus","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0},{"Connections":[],"EditorInfo":{"isRoot":false,"xPos":1073.5,"yPos":735},"ID":15,"ParamActions":[],"TMPFontGUID":null,"Text":"The
     defendant pleads not to all counts by reason of--","parentUIDs":[14],"AdvanceDialogueAutomatically":false,"AudioGUID":null,"AutoAdvanceShouldDisplayOption":false,"IconGUID":null,"Name":"Mr.
     Donovan Spence","OptionUIDs":null,"SpeechUID":0,"TimeUntilAdvance":0,"Volume":0}]}'
   saveVersion: 110
@@ -478,6 +478,7 @@ MonoBehaviour:
   - {fileID: 510048705}
   - {fileID: 510048704}
   - {fileID: 510048702}
+  - {fileID: 510048718}
   ContinueFont: {fileID: 0}
   EndConversationFont: {fileID: 0}
   Event:
@@ -791,6 +792,7 @@ GameObject:
   - component: {fileID: 510048705}
   - component: {fileID: 510048704}
   - component: {fileID: 510048702}
+  - component: {fileID: 510048718}
   m_Layer: 0
   m_Name: ConversationEventInfo
   m_TagString: Untagged
@@ -1097,6 +1099,25 @@ MonoBehaviour:
   NodeID: 0
   TMPFont: {fileID: 0}
   Icon: {fileID: 21300000, guid: dbac745ecd2b1394684d463b341c4146, type: 3}
+  Audio: {fileID: 0}
+--- !u!114 &510048718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510048701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00abedce3cdbbba46bf2d86c9518c9f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event:
+    m_PersistentCalls:
+      m_Calls: []
+  NodeID: 17
+  TMPFont: {fileID: 0}
+  Icon: {fileID: 0}
   Audio: {fileID: 0}
 --- !u!1 &721341098
 GameObject:
