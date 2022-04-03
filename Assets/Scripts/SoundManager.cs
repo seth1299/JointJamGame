@@ -51,9 +51,17 @@ public class SoundManager : MonoBehaviour
         // Add this part after having a theme song
         // Play('Theme');
     }
+
+    public Sound getSoundByName (string name)
+    {
+        Sound sound = null;
+    
+        for (int i = 0; i < sounds.Length; i++) if (sounds[i].name == name) return sounds[i];
+        return sound;
+    }
     public void Play(string name)
     {
-        Sound sound = sounds.Find(sounds, s => s.name == name);
+        Sound sound = getSoundByName(name);
 
         if (sound == null)
         {
@@ -68,7 +76,7 @@ public class SoundManager : MonoBehaviour
 
     public void Stop(string name)
     {
-        Sound sound = sounds.Find(sounds, s => s.name == name);
+        Sound sound = getSoundByName(name);
 
         if (sound == null)
         {
