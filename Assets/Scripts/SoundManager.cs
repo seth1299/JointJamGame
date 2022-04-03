@@ -57,10 +57,12 @@ public class SoundManager : MonoBehaviour
         {
             case "MainMenu": 
             {
+                Play("8-BarGrandularDreamsLoop", 1, 0, true, false);
                 Play("IntroDroneBuildup", 1, 0, false, false);
+                Play("4-BarStringPulseLoop", 1, 0, true, false);
                 break;
             }
-            case "CourtRoom": 
+            case "Courtroom": 
             {
                 Play("2-BarChimePulseLoop", 1, 0, true, false);
                 Play("4-BarDronePulseLoop", 1, 0, true, false);
@@ -74,7 +76,11 @@ public class SoundManager : MonoBehaviour
             //     Play("");
             //     break;
             // }
-            default: break;
+            default: 
+            {
+                Play("8-BarGrandularDreamsLoop", 1, 0, true, false);
+                break;
+            }
         }
     }
 
