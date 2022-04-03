@@ -4,76 +4,36 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Linq;
+using UnityEngine.Networking;
 
 public class SoundManager : MonoBehaviour
 {
-    public string audioPath = "../GameAudioV1/";
+    private string audioPath = "GameAudioV1/";
 
-    public Sound[] sounds;
-    public FileInfo[] soundFiles;
+    private AudioClip[] clips;
+    private AudioSource globalSource;
+    private List<AudioSource> runningLoops;
     private static SoundManager _instance;
     private static Dictionary<string, float> soundTimerDictionary;
 
     public static SoundManager instance { get { return _instance; } }
 
-    void setSounds(Sound[] sounds, string audioPath, FileInfo[] soundFiles)
+    void setSounds(string audioPath)
     {
         string [] paths = {"", "AsyncBellLoop/", "AwakeLoops/", "DreamState/", "Ending/", "Puzzles/"};
-        DirectoryInfo[] dirs = null;
 
-
-        bool temp = new DirectoryInfo("../GameAudioV1/").Exists;
-        Debug.Log(temp.ToString());
-        return;
-
-
-        // Grab each path as dir.
-        for (int i = 0; i < 5; i++) dirs[i] = new DirectoryInfo((audioPath + paths[i]));
-
-        // Get all files at each dir.
-        for (int i = 0; i < 5; i++) soundFiles.Concat(dirs[i] ?.GetFiles().ToArray());
-
-        // Store into data structure.
-        for (int i = 0; i < soundFiles.Length; i++)
-        {
-            Debug.Log(soundFiles[i].ToString());
-            // sounds[i].name = soundFiles[i].FullName;
-            // sounds[i].clip = soundFiles[i];
-
-        }
+        clips = Resources.LoadAll(audioPath, typeof(AudioClip)).Cast<AudioClip>().ToArray();
     }
 
     private void Awake()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
-
-        setSounds(sounds, audioPath, soundFiles);
+        setSounds(audioPath);
+        runningLoops = new List<AudioSource>();
 
         soundTimerDictionary = new Dictionary<string, float>();
-
-        foreach (Sound sound in sounds)
-        {
-            sound.source = gameObject.AddComponent<AudioSource>();
-            sound.source.clip = sound.clip;
-
-            sound.source.volume = sound.volume;
-            sound.source.pitch = sound.pitch;
-            sound.source.loop = sound.isLoop;
-
-            if (sound.hasCooldown)
-            {
-                Debug.Log(sound.name);
-                soundTimerDictionary[sound.name] = 0f;
-            }
-        }
+        globalSource = gameObject.AddComponent<AudioSource>();
     }
+
     public static string curScene;
     void OnEnable()
     {
@@ -95,17 +55,20 @@ public class SoundManager : MonoBehaviour
 
         switch (curScene) 
         {
-            // case "MainMenu": 
-            // {
-            //     Play("IntroDroneBuildup", 0, 0, false, false);
-            //     break;
-            // }
-            // case "CourtRoom": 
-            // {
-            //     curPath += "AwakeLoops/";
-            //     Play(curPath + "2-BarChimePulseLoop", );
-            //     break;
-            // }
+            case "MainMenu": 
+            {
+                Play("IntroDroneBuildup", 1, 0, false, false);
+                break;
+            }
+            case "CourtRoom": 
+            {
+                Play("2-BarChimePulseLoop", 1, 0, true, false);
+                Play("4-BarDronePulseLoop", 1, 0, true, false);
+                Play("4-BarStringPulseLoop", 1, 0, true, false);
+                Play("4-BarStringPulseLoop-Pitched1", 1, 0, true, false);
+                Play("4-BarStringPulseLoop-Pitched2", 1, 0, true, false);
+                break;
+            }
             // case "CourtRoom": 
             // {
             //     Play("");
@@ -115,61 +78,36 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public Sound getSoundByName (string name)
+    public AudioClip getSoundByName (string name)
     {
-        Sound sound = null;
-    
-        for (int i = 0; i < sounds.Length; i++) if (sounds[i].name == name) return sounds[i];
-        return sound;
+        return clips.Where(x=>x.name == name).First();
     }
     public void Play(string name, float volume, float pitch, bool isLoop, bool hasCooldown)
     {
-        Sound sound = getSoundByName(name);
+        AudioClip clip = clips.Where(x=>x.name == name).First();
 
-        if (sound == null)
+        if(isLoop)
         {
-            Debug.LogError("Sound " + name + " Not Found!");
+            var newSource = gameObject.AddComponent<AudioSource>();
+            newSource.volume = volume;
+            newSource.loop = true;
+            newSource.clip = clip;
+            newSource.Play();
+            runningLoops.Add(newSource);
             return;
         }
 
-        if (!CanPlaySound(sound)) return;
-
-        sound.name = name;
-        sound.volume = volume;
-        sound.pitch = pitch;
-        sound.isLoop = isLoop;
-        sound.hasCooldown = hasCooldown;
-        sound.source.Play();
+        globalSource.PlayOneShot(clip, volume);
     }
 
-    public void Stop(string name)
+    public void Stop(string name) // for loops
     {
-        Sound sound = getSoundByName(name);
-
-        if (sound == null)
-        {
-            Debug.LogError("Sound " + name + " Not Found!");
-            return;
-        }
-
-        sound.source.Stop();
-    }
-
-    private static bool CanPlaySound(Sound sound)
-    {
-        if (soundTimerDictionary.ContainsKey(sound.name))
-        {
-            float lastTimePlayed = soundTimerDictionary[sound.name];
-
-            if (lastTimePlayed + sound.clip.length < Time.time)
-            {
-                soundTimerDictionary[sound.name] = Time.time;
-                return true;
+        foreach(var l in runningLoops){
+            if(l.clip.name == name){
+                l.Stop();
+                runningLoops.RemoveAt(runningLoops.IndexOf(l));
+                Destroy(l);
             }
-
-            return false;
         }
-
-        return true;
     }
 }
