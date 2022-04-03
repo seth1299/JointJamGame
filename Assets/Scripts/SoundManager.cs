@@ -1,20 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
-    private static SoundManager _instance;
+    public string audioPath = "../GameAudioV1/";
+
     public Sound[] sounds;
+    private static SoundManager _instance;
     private static Dictionary<string, float> soundTimerDictionary;
 
-    public static SoundManager instance
-    {
-        get
-        {
-            return _instance;
-        }
-    }
+    public static SoundManager instance { get { return _instance; } }
 
     private void Awake()
     {
@@ -45,11 +42,45 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
+    public static string curScene;
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        curScene = scene.name;
+    }
 
     private void Start()
     {
-        // Add this part after having a theme song
-        // Play('Theme');
+        string curPath = audioPath;
+
+        switch (curScene) 
+        {
+            case "MainMenu": 
+            {
+                Play("IntroDroneBuildup", 0, 0, false, false);
+                break;
+            }
+            // case "CourtRoom": 
+            // {
+            //     curPath += "AwakeLoops/";
+            //     Play(curPath + "2-BarChimePulseLoop", );
+            //     break;
+            // }
+            // case "CourtRoom": 
+            // {
+            //     Play("");
+            //     break;
+            // }
+            default: break;
+        }
     }
 
     public Sound getSoundByName (string name)
@@ -59,7 +90,7 @@ public class SoundManager : MonoBehaviour
         for (int i = 0; i < sounds.Length; i++) if (sounds[i].name == name) return sounds[i];
         return sound;
     }
-    public void Play(string name)
+    public void Play(string name, float volume, float pitch, bool isLoop, bool hasCooldown)
     {
         Sound sound = getSoundByName(name);
 
@@ -71,6 +102,11 @@ public class SoundManager : MonoBehaviour
 
         if (!CanPlaySound(sound)) return;
 
+        sound.name = name;
+        sound.volume = volume;
+        sound.pitch = pitch;
+        sound.isLoop = isLoop;
+        sound.hasCooldown = hasCooldown;
         sound.source.Play();
     }
 

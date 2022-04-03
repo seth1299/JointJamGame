@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/AudioManagerScene.unity
+    guid: bece773c6777ed648bfea486c4b5cbcb
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 51aca8c01e1e4d14f985b7c1520608d7
   - enabled: 1
-    path: Assets/Scenes/Scene1.unity
-    guid: 7d125bcd68941a84ebeb52d0424756ab
+    path: Assets/Scenes/Courtroom.unity
+    guid: 53eb1489275167f448bd4bba6fad4660
   m_configObjects: {}
