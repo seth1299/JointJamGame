@@ -7,8 +7,7 @@ using UnityEngine;
 
 
 public class MazeGen : MonoBehaviour
-{
-    
+{    
     public GameObject wall;
     public bool[,] visited;
     public bool[,] hwalls; 

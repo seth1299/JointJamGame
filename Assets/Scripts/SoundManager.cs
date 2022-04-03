@@ -2,16 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System.Linq;
 
 public class SoundManager : MonoBehaviour
 {
     public string audioPath = "../GameAudioV1/";
 
     public Sound[] sounds;
+    public FileInfo[] soundFiles;
     private static SoundManager _instance;
     private static Dictionary<string, float> soundTimerDictionary;
 
     public static SoundManager instance { get { return _instance; } }
+
+    void setSounds(Sound[] sounds, string audioPath, FileInfo[] soundFiles)
+    {
+        string [] paths = {"", "AsyncBellLoop/", "AwakeLoops/", "DreamState/", "Ending/", "Puzzles/"};
+        DirectoryInfo[] dirs = null;
+
+
+        bool temp = new DirectoryInfo("../GameAudioV1/").Exists;
+        Debug.Log(temp.ToString());
+        return;
+
+
+        // Grab each path as dir.
+        for (int i = 0; i < 5; i++) dirs[i] = new DirectoryInfo((audioPath + paths[i]));
+
+        // Get all files at each dir.
+        for (int i = 0; i < 5; i++) soundFiles.Concat(dirs[i] ?.GetFiles().ToArray());
+
+        // Store into data structure.
+        for (int i = 0; i < soundFiles.Length; i++)
+        {
+            Debug.Log(soundFiles[i].ToString());
+            // sounds[i].name = soundFiles[i].FullName;
+            // sounds[i].clip = soundFiles[i];
+
+        }
+    }
 
     private void Awake()
     {
@@ -23,6 +53,8 @@ public class SoundManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        setSounds(sounds, audioPath, soundFiles);
 
         soundTimerDictionary = new Dictionary<string, float>();
 
@@ -63,11 +95,11 @@ public class SoundManager : MonoBehaviour
 
         switch (curScene) 
         {
-            case "MainMenu": 
-            {
-                Play("IntroDroneBuildup", 0, 0, false, false);
-                break;
-            }
+            // case "MainMenu": 
+            // {
+            //     Play("IntroDroneBuildup", 0, 0, false, false);
+            //     break;
+            // }
             // case "CourtRoom": 
             // {
             //     curPath += "AwakeLoops/";
