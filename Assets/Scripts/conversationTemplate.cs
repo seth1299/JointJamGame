@@ -5,13 +5,7 @@ using DialogueEditor;
 
 public class conversationTemplate : MonoBehaviour
 {
-
     public NPCConversation myConversation;
-
-    private void OnMouseClick()
-    {
-        if (Input.GetMouseButtonDown(0)){
-            ConversationManager.Instance.StartConversation(myConversation);
-        }
-    }
+    ConversationManager.Instance.StartConversation(myConversation);        
+    
 }
