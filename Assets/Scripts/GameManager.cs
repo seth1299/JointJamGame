@@ -28,17 +28,36 @@ public class GameManager : MonoBehaviour
     // This boolean keeps track of if the game is paused or not.
     private bool IsPaused;
 
+    [SerializeField]
+    [Tooltip("This is how many moves the player has to win the chess thingy. Only useful in the Chess scene.")]
+    public int NumberOfMoves;
+
+    public int CorrectMoves;
+
     private bool PuzzleSolvedYet;
 
     // This is just set to the game's time scale, so that it doesn't get overwritten.
     private float TIME_SCALE;
+
+    private ChessPiece selectedChessPiece = null;
     Ray MouseClick;
+
+    public int GetNumberOfMoves()
+    {
+        return NumberOfMoves;
+    }
+
+    public void ChangeNumberOfMoves(int value)
+    {
+        NumberOfMoves += value;
+    }
 
     void Start()
     {
         IsPaused = false;
         TIME_SCALE = Time.timeScale;
         PauseMenuCanvas.enabled = false;
+        
     }
 
     public bool GetPuzzleSolvedYet()
@@ -48,9 +67,17 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if ( CorrectMoves == 3 )
+        {
+            // Code to set the AudioManager's bool for chess puzzle to true
+            SceneManager.LoadScene("Courtroom");
+        }
+            PuzzleSolvedYet = true;
         // This handles pausing the game, constantly checking if the player is pressing "P" to pause the game or not.
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
             SwitchPaused();
+
+
 
         float PlayerSpeed = Player.GetSpeed(), PlayerInitialSpeed = Player.GetInitialSpeed();
 
@@ -59,19 +86,38 @@ public class GameManager : MonoBehaviour
             MouseClick = AerialCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             bool hit2 = Physics.Raycast(MouseClick, out hit, 100.0f);
-            if ( hit.collider.gameObject.CompareTag("ChessPiece"))
+            GameObject hitObject = hit.collider.gameObject;
+            if ( hitObject.CompareTag("ChessPiece") && hitObject.GetComponent<ChessPiece>().IsValidColor())
             {
-                ChessPiece temp = hit.collider.gameObject.GetComponent<ChessPiece>();
-                Debug.Log(temp.GetCurrentXPosition() + ", " + temp.GetCurrentYPosition());
-                temp.FindValidMoves();
+                if ( hitObject?.name == selectedChessPiece?.name)
+                {
+                    selectedChessPiece.DeselectPiece();
+                    selectedChessPiece = null;
+                }
+                else
+                {
+                    selectedChessPiece = hitObject.GetComponent<ChessPiece>();
+                    selectedChessPiece.FindValidMoves();
+                }
             }
-            // Debug.DrawRay(MouseClick.origin, MouseClick.direction * 15, Color.red, 100f);
-            // Debug.Log(hit.collider.gameObject.name);
+            else if ( hitObject.CompareTag("BoardTile"))
+            {
+                if (selectedChessPiece != null && hitObject.GetComponent<ChessBoard>().GetIsLitUp())
+                {
+                    selectedChessPiece.MoveToTile(hitObject.transform.position);
+                    selectedChessPiece.DeselectPiece();
+                    selectedChessPiece = null;
+                }
+            }
         }
         
         if ( IsPaused )
         {
             SprintingDebugText.text = "Game is paused.";
+        }
+        else if ( SceneManager.GetActiveScene().name == "Chess")
+        {
+            SprintingDebugText.text = ($"Checkmate the Black player! {NumberOfMoves} more moves left!");
         }
         else if ( PlayerSpeed > PlayerInitialSpeed )
         {
