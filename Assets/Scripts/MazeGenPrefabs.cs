@@ -11,6 +11,8 @@ public class MazeGenPrefabs : MonoBehaviour
     
     public GameObject wall;
     public GameObject wall2;
+    public GameObject floorTile;
+    public GameObject plank;
     public bool[,] visited;
     public bool[,] hwalls; 
     public bool[,] vwalls; 
@@ -142,20 +144,31 @@ public class MazeGenPrefabs : MonoBehaviour
         {
             for (int j = 0; j < size+1; j++)
             {
+                var thicknessRatio = 1f;
                 if( hwalls[i,j] && i < size){
                     var a = Random.Range(0,5);
                     var prefab = a < 3 ? Instantiate(wall,  new Vector3(i*scale, 0, j*scale-scale/2), Quaternion.identity)
                                        : Instantiate(wall2, new Vector3(i*scale, 0, j*scale-scale/2), Quaternion.identity);
-                    prefab.transform.localScale = new Vector3(scale, scale/4, scale/4);
+                    prefab.transform.localScale = new Vector3(scale, scale/2, scale * thicknessRatio);
                     prefab.name = "hwall_{" + i.ToString() + "," + j.ToString()+"}";
                 }
                 if( vwalls[i,j] && j < size ){
                     var a = Random.Range(0,5);
                     var prefab = a < 3 ? Instantiate(wall, new Vector3(i*scale-scale/2, 0, j*scale), Quaternion.identity)
                                        : Instantiate(wall, new Vector3(i*scale-scale/2, 0, j*scale), Quaternion.identity);
-                    prefab.transform.localScale = new Vector3(scale, scale/4, scale/4);
+                    prefab.transform.localScale = new Vector3(scale, scale/2, scale * thicknessRatio);
                     prefab.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
                     prefab.name = "vwall_{" + i.ToString() + "," + j.ToString()+"}";
+                }
+                if( i < size && j < size ){
+                    // Make floor
+                    var prefab = Instantiate(floorTile, new Vector3(i*scale, 0, j*scale), Quaternion.identity);
+                    prefab.transform.localScale = new Vector3(scale*0.35f, scale, scale*0.35f);
+                    // prefab.transform.localScale = new Vector3(scale*0.98f, scale/10, scale*0.98f);
+                    // var r = Random.Range(0.0f, 8.0f);
+                    // prefab.transform.rotation = Quaternion.AngleAxis(r, Vector3.up);
+                    // prefab.transform.rotation = Quaternion.AngleAxis(r/4, Vector3.forward);
+                    prefab.name = "FloorTile_{" + i.ToString() + "," + j.ToString()+"}";
                 }
             }
         }
@@ -166,18 +179,27 @@ public class MazeGenPrefabs : MonoBehaviour
         {
             for (int j = 0; j < size; j++)
             {
+                var r = 0.0f;
+                var PlankScale = new Vector3(scale/8, scale/10, scale*0.8f);
                 if( !hwalls[i,j] && i < size){
-                    var prefab = Instantiate(wall, new Vector3(i*scale, 0, j*scale-scale/2), Quaternion.identity);
-                    prefab.transform.localScale = new Vector3(scale/8, scale/40, scale);
+                    var prefab = Instantiate(plank, new Vector3(i*scale, 0, j*scale-scale/2), Quaternion.identity);
+                    prefab.transform.localScale = PlankScale;
+                    r = Random.Range(-4.0f, 4.0f);
+                    prefab.transform.rotation = Quaternion.AngleAxis(r, Vector3.up);
                     prefab.name = "vwall_{" + i.ToString() + "," + j.ToString()+"}";
                 }
                 if( !vwalls[i,j] && j < size ){
-                    var prefab = Instantiate(wall, new Vector3(i*scale-scale/2, 0, j*scale), Quaternion.identity);
-                    prefab.transform.localScale = new Vector3(scale, scale/40, scale/8);
+                    var prefab = Instantiate(plank, new Vector3(i*scale-scale/2, 0, j*scale), Quaternion.identity);
+                    prefab.transform.localScale = PlankScale;
+                    r = Random.Range(-4.0f, 4.0f);
+                    prefab.transform.rotation = Quaternion.AngleAxis(90+r, Vector3.up);
                     prefab.name = "hwall_{" + i.ToString() + "," + j.ToString()+"}";
                 }
-                var pillar = Instantiate(wall, new Vector3(i*scale, -scale*5/2, j*scale), Quaternion.identity);
-                pillar.transform.localScale = new Vector3(scale/4, scale*5, scale/4);
+                var pillar = Instantiate(wall, new Vector3(i*scale, -scale*2, j*scale), Quaternion.identity);
+                pillar.transform.localScale = new Vector3(scale/4, scale, scale);
+                pillar.name = "pillar_{" + i.ToString() + "," + j.ToString()+"}";
+                r = Random.Range(-45.0f, 45.0f);
+                pillar.transform.rotation = Quaternion.AngleAxis(r, Vector3.up);
             }
         }
     }
