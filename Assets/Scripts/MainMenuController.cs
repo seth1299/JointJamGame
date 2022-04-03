@@ -27,7 +27,7 @@ public class MainMenuController : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Scene1");
+        SceneManager.LoadScene("Chess");
     }
 
     public void MainMenu()
