@@ -10,7 +10,9 @@ public class ChessBoard : MonoBehaviour
     [SerializeField]
     private GameObject Particle_System;
 
-    private bool IsLitUp, HasWhiteChessPieceOnIt;
+    private GameObject BlackPiece = null, WhitePiece = null;
+
+    public bool IsLitUp, HasWhiteChessPieceOnIt, HasBlackChessPieceOnIt;
 
     public int GetXValue()
     {
@@ -51,6 +53,19 @@ public class ChessBoard : MonoBehaviour
             if ( other.gameObject.CompareTag("ChessPiece") && other.gameObject.GetComponent<ChessPiece>().IsValidColor())
             {
                 HasWhiteChessPieceOnIt = true;
+                WhitePiece = other.gameObject;
+                if ( HasBlackChessPieceOnIt )
+                {
+                    Destroy(BlackPiece);
+                    HasBlackChessPieceOnIt = false;
+                }
+            }
+            else if ( other.gameObject.CompareTag("ChessPiece") && !other.gameObject.GetComponent<ChessPiece>().IsValidColor())
+            {
+                HasBlackChessPieceOnIt = true;
+                if ( HasWhiteChessPieceOnIt )
+                    Destroy(WhitePiece);
+                BlackPiece = other.gameObject;
             }
         }
     }
@@ -62,6 +77,10 @@ public class ChessBoard : MonoBehaviour
             if ( other.gameObject.CompareTag("ChessPiece") && other.gameObject.GetComponent<ChessPiece>().IsValidColor())
             {
                 HasWhiteChessPieceOnIt = false;
+            }
+            else if ( other.gameObject.CompareTag("ChessPiece") && !other.gameObject.GetComponent<ChessPiece>().IsValidColor())
+            {
+                HasBlackChessPieceOnIt = true;
             }
         }
     }

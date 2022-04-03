@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     [Tooltip("This is how many moves the player has to win the chess thingy. Only useful in the Chess scene.")]
-    private int NumberOfMoves;
+    public int NumberOfMoves;
+
+    public int CorrectMoves;
 
     private bool PuzzleSolvedYet;
 
@@ -39,6 +41,16 @@ public class GameManager : MonoBehaviour
 
     private ChessPiece selectedChessPiece = null;
     Ray MouseClick;
+
+    public int GetNumberOfMoves()
+    {
+        return NumberOfMoves;
+    }
+
+    public void ChangeNumberOfMoves(int value)
+    {
+        NumberOfMoves += value;
+    }
 
     void Start()
     {
@@ -55,9 +67,17 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if ( CorrectMoves == 3 )
+        {
+            // Code to set the AudioManager's bool for chess puzzle to true
+            SceneManager.LoadScene("Courtroom");
+        }
+            PuzzleSolvedYet = true;
         // This handles pausing the game, constantly checking if the player is pressing "P" to pause the game or not.
         if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
             SwitchPaused();
+
+
 
         float PlayerSpeed = Player.GetSpeed(), PlayerInitialSpeed = Player.GetInitialSpeed();
 
@@ -85,6 +105,8 @@ public class GameManager : MonoBehaviour
                 if (selectedChessPiece != null && hitObject.GetComponent<ChessBoard>().GetIsLitUp())
                 {
                     selectedChessPiece.MoveToTile(hitObject.transform.position);
+                    selectedChessPiece.DeselectPiece();
+                    selectedChessPiece = null;
                 }
             }
         }
