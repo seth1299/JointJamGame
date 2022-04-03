@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     [Tooltip("This is how many lives the player has.")]
     private int Lives;
-
+    
     [SerializeField]
     [Tooltip("This is the Character Controller for the player's character.")]
     private CharacterController Controller;
@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
         // This script will only run if the game isn't currently paused.
         if ( !Game_Manager.GetIsPaused() )
         {
-
             // This sets the player's horizontal and vertical bearings to variables 
             // to simplify future code that uses them. It also makes a Vector3 variable
             // called "move" that is the orientation the player will be moving towards.
@@ -76,11 +75,6 @@ public class PlayerController : MonoBehaviour
                 Speed = InitialSpeed;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                StartCoroutine("Jump");
-            }
-
             // Using a Character Controller game component, this piece of code moves
             // the character very easily using the Speed value multiplied by deltaTime,
             // which is the amount of time that has passed from the previous frame to
@@ -91,9 +85,13 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    private IEnumerator Jump()
+    public float GetSpeed()
     {
-        yield return null;
-        // TODO: Implement jump mechanic
+        return Speed;
+    }
+
+    public float GetInitialSpeed()
+    {
+        return InitialSpeed;
     }
 }
